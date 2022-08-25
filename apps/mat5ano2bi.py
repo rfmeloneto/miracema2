@@ -12,11 +12,15 @@ from dicionario import *
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("../datasets").resolve()
 df_mat5ano2bi = pd.read_csv(DATA_PATH.joinpath("mat5ano2bi.csv"))
-df_habs52bi= df_mat5ano2bi.drop(columns=['Escola','Estudante','Ano','Turma','Total'])  
+df_habs52bi= df_mat5ano2bi.drop(columns=['Escola','Ano','Turma','Total'])  
+
 
 layout = html.Div(children=[
-    
-    dbc.Row(dbc.Col(dcc.Dropdown(df_mat5ano2bi['Turma'].unique(), value='A', style ={'margin-top':10, 'margin-left':5}, id='drop-down52bi',), width=2)),
+    dbc.Row(
+        children=[
+        dbc.Col(dcc.Dropdown(df_mat5ano2bi['Escola'].unique(), value='E. M. T. I. Vilmar Vasconselos Feitosa', style ={'margin-top':10, 'margin-left':5}, id='drop-downEs52bi',), width=4),
+        dbc.Col(dcc.Dropdown(df_mat5ano2bi['Turma'].unique(), value='A', style ={'margin-top':10, 'margin-left':5}, id='drop-down52bi',), width=2)]),
+       
     html.Br(),
     dbc.Row(
             children=[
@@ -87,13 +91,16 @@ dbc.Row(children=[
 
 ])
 
+
 @app.callback(
     Output('total52bi','children'),
     Output('cardtotal52bi', 'color'),
-    Input('drop-down52bi','value')
+    Input('drop-down52bi','value'),
+    Input('drop-downEs52bi', 'value'),
 )
-def habtotal(turma):
-    df = df_mat5ano2bi.loc[df_mat5ano2bi['Turma']==turma]
+def hab1(turma, escola):
+    dff = df_mat5ano2bi.loc[df_mat5ano2bi['Escola']==escola]
+    df= dff.loc[dff['Turma']==turma]
     soma = df['Total'].values.sum()
     qtd = df['Total'].count()
     soma=int(soma)
@@ -109,10 +116,12 @@ def habtotal(turma):
 @app.callback(
     Output('EF05MA022bi','children'),
     Output('cardEF05MA022bi', 'color'),
-    Input('drop-down52bi','value')
+    Input('drop-down52bi','value'),
+    Input('drop-downEs52bi', 'value'),
 )
-def hab1(turma):
-    df= df_mat5ano2bi.loc[df_mat5ano2bi['Turma']==turma]
+def hab1(turma, escola):
+    dff = df_mat5ano2bi.loc[df_mat5ano2bi['Escola']==escola]
+    df= dff.loc[dff['Turma']==turma]
     soma = df['EF05MA02'].values.sum()
     qtd = df['EF05MA02'].count()
     media= soma/qtd
@@ -130,10 +139,12 @@ def hab1(turma):
 @app.callback(
     Output('EF05MA032bi','children'),
     Output('cardEF05MA032bi', 'color'),
-    Input('drop-down52bi','value')
+    Input('drop-down52bi','value'),
+    Input('drop-downEs52bi', 'value'),
 )
-def hab2(turma):
-    df= df_mat5ano2bi.loc[df_mat5ano2bi['Turma']==turma]
+def hab1(turma, escola):
+    dff = df_mat5ano2bi.loc[df_mat5ano2bi['Escola']==escola]
+    df= dff.loc[dff['Turma']==turma]
     soma = df['EF05MA03'].values.sum()
     qtd = df['EF05MA03'].count()
     media= soma/qtd
@@ -151,10 +162,12 @@ def hab2(turma):
 @app.callback(
     Output('EF05MA192bi','children'),
     Output('cardEF05MA192bi', 'color'),
-    Input('drop-down52bi','value')
+    Input('drop-down52bi','value'),
+    Input('drop-downEs52bi', 'value'),
 )
-def hab3(turma):
-    df= df_mat5ano2bi.loc[df_mat5ano2bi['Turma']==turma]
+def hab1(turma, escola):
+    dff = df_mat5ano2bi.loc[df_mat5ano2bi['Escola']==escola]
+    df= dff.loc[dff['Turma']==turma]
     soma = df['EF05MA19'].values.sum()
     qtd = df['EF05MA19'].count()
     media= soma/qtd
@@ -172,10 +185,12 @@ def hab3(turma):
 @app.callback(
     Output('EF05MA182bi','children'),
     Output('cardEF05MA182bi', 'color'),
-    Input('drop-down52bi','value')
+    Input('drop-down52bi','value'),
+    Input('drop-downEs52bi', 'value'),
 )
-def hab4(turma):
-    df= df_mat5ano2bi.loc[df_mat5ano2bi['Turma']==turma]
+def hab1(turma, escola):
+    dff = df_mat5ano2bi.loc[df_mat5ano2bi['Escola']==escola]
+    df= dff.loc[dff['Turma']==turma]
     soma = df['EF05MA18'].values.sum()
     qtd = df['EF05MA18'].count()
     media= soma/qtd
@@ -193,10 +208,12 @@ def hab4(turma):
 @app.callback(
     Output('EF05MA242bi','children'),
     Output('cardEF05MA242bi', 'color'),
-    Input('drop-down52bi','value')
+    Input('drop-down52bi','value'),
+    Input('drop-downEs52bi', 'value'),
 )
-def hab5(turma):
-    df= df_mat5ano2bi.loc[df_mat5ano2bi['Turma']==turma]
+def hab1(turma, escola):
+    dff = df_mat5ano2bi.loc[df_mat5ano2bi['Escola']==escola]
+    df= dff.loc[dff['Turma']==turma]
     soma = df['EF05MA24'].values.sum()
     qtd = df['EF05MA24'].count()
     media= soma/qtd
@@ -215,10 +232,12 @@ def hab5(turma):
 @app.callback(
     Output('EF05MA252bi','children'),
     Output('cardEF05MA252bi', 'color'),
-    Input('drop-down52bi','value')
+    Input('drop-down52bi','value'),
+    Input('drop-downEs52bi', 'value'),
 )
-def hab6(turma):
-    df= df_mat5ano2bi.loc[df_mat5ano2bi['Turma']==turma]
+def hab1(turma, escola):
+    dff = df_mat5ano2bi.loc[df_mat5ano2bi['Escola']==escola]
+    df= dff.loc[dff['Turma']==turma]
     soma = df['EF05MA25'].values.sum()
     qtd = df['EF05MA25'].count()
     media= soma/qtd
@@ -246,9 +265,11 @@ def hab6(turma):
     Output('figacerto52bi','figure'),
     Input('drop-hab52bi','value'),
     Input('drop-turma52bi','value'),
+    Input('drop-downEs52bi','value')
 )
-def acertos(hab, turma):
-    d = df_mat5ano2bi.loc[df_mat5ano2bi['Turma']==turma]
+def acertos(hab, turma, escola):
+    df=df_mat5ano2bi.loc[df_mat5ano2bi['Escola']==escola]
+    d = df.loc[df['Turma']==turma]
     dff= d[hab]
     acerto = 0
     erro = 0
@@ -263,9 +284,11 @@ def acertos(hab, turma):
 @app.callback(
     Output('fighabs52bi','figure'),
     Input('drop-turma52bi','value'),
+    Input('drop-downEs52bi','value'),
 )
-def habs(turma):
-    df = df_mat5ano2bi.loc[df_mat5ano2bi['Turma']==turma]
+def habs(turma,escola):
+    d = df_mat5ano2bi.loc[df_mat5ano2bi['Escola']==escola]
+    df = d.loc[d['Turma']==turma]
     fig= px.histogram(df, x = 'Total', color='Total', labels= {'Total':'Percentual de Habilidades Desenvolvidas'}, title= 'Percentual de Habilidades Desenvolvidas <br> por Quantidade de Estudante'+' na turma '+str(turma).upper())
     fig.update_layout(showlegend=False)
     fig.update_yaxes( title= 'Quantidade de Estudantes')

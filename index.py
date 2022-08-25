@@ -89,7 +89,7 @@ def display_page(pathname):
     if pathname == '/apps/port9ano2bi':
         return port9ano2bi.layout, 'Português 9 Ano / 2 Bimestre'
     else:
-        return mat5ano2bi.layout, 'Matemática 1 Ano / 1 Bimestre'
+        return mat5ano2bi.layout, 'Matemática 5 Ano / 2 Bimestre'
 
 
 @app.callback(
@@ -113,4 +113,4 @@ def toggle_collapse(n, is_open):
     return is_open
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
